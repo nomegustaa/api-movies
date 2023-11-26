@@ -1,5 +1,3 @@
-**README.md - Projeto de Cadastro de Filmes com Tags**
-
 # Cadastro de Filmes com Tags
 
 Bem-vindo ao projeto de cadastro de filmes com tags! Este é um aplicativo Node.js que permite aos usuários cadastrar filmes, fornecendo informações detalhadas, como nome, descrição, nota e tags associadas.
