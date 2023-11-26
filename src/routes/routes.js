@@ -4,6 +4,7 @@ import controllerCreateTag from "../controller/createTags.js";
 import controllerLoginUser from "../controller/loginUser.js";
 import controlllerMovies from "../controller/listMovies.js";
 import controllerDeleteMovie from "../controller/deleteMovie.js";
+import controllerUpdateUser from "../controller/updateUser.js";
 import MiddlewareAuthentatication from "../middleware/authentication.js";
 
 const Routes = async (fastify, options) => {
@@ -17,9 +18,11 @@ const Routes = async (fastify, options) => {
 
   fastify.post("/createTag/:id", controllerCreateTag.createTag);
 
-  fastify.get("/movies/:id", controlllerMovies.getListMovie);
+  fastify.get("/movies", controlllerMovies.getListMovie);
 
   fastify.delete("/deleteMovie/:idMovie", controllerDeleteMovie.deleteMovie);
+
+  fastify.put("/updateUser", controllerUpdateUser.updateUser);
 };
 
 export default Routes;

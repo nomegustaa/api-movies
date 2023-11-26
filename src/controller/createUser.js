@@ -1,25 +1,21 @@
 import ServiceCreateUser from "../service/createUser.js";
 import ServicelistUsers from "../service/listUsers.js";
 import { BCRYPT_AMOUNT } from "../config/env.js";
-import validEmail from "../helpers/validEmail.js";
+
+import responseHandler from "../helpers/responseHandler.js";
 import bcrypt from "bcrypt";
-import validCampVoid from "../helpers/vaidCampVoid.js";
 
 const createUser = async (request, reply) => {
   const { nameUser, emailUser, passwordUser, avatar } = request.body;
 
+  if (!nameUser || !emailUser || !passwordUser || !avatar) {
+    responseHandler.sendErrorReply(reply, 400, "Missing parameters");
+  }
   try {
-    if (validCampVoid(nameUser, emailUser, passwordUser, avatar)) {
-      return reply.status(400).send({ message: "Missing parameters" });
-    }
-
     const validEmailExisting = await ServicelistUsers.listUser();
 
-    if (!validEmail(emailUser)) {
-      return reply.status(400).send({ message: "email invalid" });
-    }
     if (validEmailExisting.some((userEmail) => userEmail.email === emailUser)) {
-      return reply.status(400).send({ message: "email already exists" });
+      return responseHandler.sendErrorReply(reply, 400, "email already exists");
     }
 
     const passwordHash = await bcrypt.hash(passwordUser, Number(BCRYPT_AMOUNT));
@@ -30,7 +26,7 @@ const createUser = async (request, reply) => {
       passwordHash,
       avatar
     );
-    return reply.status(201).send({ message: "user created successfully" });
+    return responseHandler.sendSuccessReply(reply, "user created successfully");
   } catch (e) {
     console.log(e);
     throw new Error("failed create user");
