@@ -6,9 +6,9 @@ import responseHandler from "../helpers/responseHandler.js";
 import bcrypt from "bcrypt";
 
 const createUser = async (request, reply) => {
-  const { nameUser, emailUser, passwordUser, avatar } = request.body;
+  const { nameUser, emailUser, passwordUser } = request.body;
 
-  if (!nameUser || !emailUser || !passwordUser || !avatar) {
+  if (!nameUser || !emailUser || !passwordUser) {
     responseHandler.sendErrorReply(reply, 400, "Missing parameters");
   }
   try {
@@ -20,12 +20,7 @@ const createUser = async (request, reply) => {
 
     const passwordHash = await bcrypt.hash(passwordUser, Number(BCRYPT_AMOUNT));
 
-    await ServiceCreateUser.createUser(
-      nameUser,
-      emailUser,
-      passwordHash,
-      avatar
-    );
+    await ServiceCreateUser.createUser(nameUser, emailUser, passwordHash);
     return responseHandler.sendSuccessReply(reply, "user created successfully");
   } catch (e) {
     console.log(e);

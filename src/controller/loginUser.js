@@ -7,8 +7,8 @@ import responseHandler from "../helpers/responseHandler.js";
 const loginUser = async (request, reply) => {
   const { emailUser, passwordUser } = request.body;
   try {
-    const Users = await ServiceListUsers.listUser();
-    const infoUser = Users.find((userEmail) => userEmail.email === emailUser);
+    const users = await ServiceListUsers.listUser();
+    const infoUser = users.find((userEmail) => userEmail.email === emailUser);
 
     if (!infoUser) {
       return responseHandler.sendErrorReply(reply, 400, "email not registered");

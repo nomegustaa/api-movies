@@ -4,7 +4,7 @@ const createMovieTags = async (note_id, userId, tag) => {
   try {
     const movieTag = await connections.query(`
       INSERT INTO 
-        movies_tags (note_id, user_id, name) 
+      movies_tags (note_id, user_id, name) 
       VALUES ('${note_id}', '${userId}', '${tag}')
     `);
 

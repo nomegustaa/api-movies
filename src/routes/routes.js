@@ -3,9 +3,12 @@ import controllerCreateMovie from "../controller/createMovie.js";
 import controllerCreateTag from "../controller/createTags.js";
 import controllerLoginUser from "../controller/loginUser.js";
 import controlllerMovies from "../controller/listMovies.js";
+import controlllerMoviesById from "../controller/listMovieById.js";
+import controllerListUserById from "../controller/listUserById.js";
 import controllerDeleteMovie from "../controller/deleteMovie.js";
 import controllerUpdateUser from "../controller/updateUser.js";
 import MiddlewareAuthentatication from "../middleware/authentication.js";
+import controllerAuthUser from "../controller/authUser.js";
 
 const Routes = async (fastify, options) => {
   fastify.addHook("onRequest", MiddlewareAuthentatication.authentication);
@@ -14,15 +17,21 @@ const Routes = async (fastify, options) => {
 
   fastify.post("/createUser", controllerCreateUser.createUser);
 
-  fastify.post("/createMovie", controllerCreateMovie.createMovie);
+  fastify.post("/createmovie", controllerCreateMovie.createMovie);
 
   fastify.post("/createTag/:id", controllerCreateTag.createTag);
 
   fastify.get("/movies", controlllerMovies.getListMovie);
 
+  fastify.get("/moviesById/:id", controlllerMoviesById.getListMovieById);
+
   fastify.delete("/deleteMovie/:idMovie", controllerDeleteMovie.deleteMovie);
 
   fastify.put("/updateUser", controllerUpdateUser.updateUser);
+
+  fastify.get("/auth/checktoken", controllerAuthUser.authUser);
+
+  fastify.get("/listuser", controllerListUserById.getUserById);
 };
 
 export default Routes;

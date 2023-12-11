@@ -3,7 +3,7 @@ import connections from "../connections/connectionsDB.js";
 const deleteMovie = async (id_movie) => {
   try {
     const movie = await connections.query(`
-      DELETE movies_users WHERE id = ${id_movie}
+      DELETE movies_notes WHERE id = ${id_movie}
     `);
     return movie;
   } catch (e) {
