@@ -8,8 +8,7 @@ import jwt from "jsonwebtoken";
 const updateUser = async (request, reply) => {
   const token = request.headers.authorization;
   const { idUser } = jwt.decode(token, SECRET_KEY);
-  const { nameUser, emailUser, avatarUser, passwordUser, old_password } =
-    request.body;
+  const { nameUser, emailUser, passwordUser, old_password } = request.body;
   const user = await ServiceListUsers.listUser();
 
   const verifyUser = user.find((User) => User.id === idUser);
@@ -50,7 +49,6 @@ const updateUser = async (request, reply) => {
 
   verifyUser.name = nameUser ? nameUser : verifyUser.name;
   verifyUser.email = emailUser ? emailUser : verifyUser.email;
-  verifyUser.avatar = avatarUser ? avatarUser : verifyUser.avatar;
   await ServiceUpdateUser.updateUser(
     verifyUser.name,
     verifyUser.email,

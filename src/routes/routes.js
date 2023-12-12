@@ -7,6 +7,8 @@ import controlllerMoviesById from "../controller/listMovieById.js";
 import controllerListUserById from "../controller/listUserById.js";
 import controllerDeleteMovie from "../controller/deleteMovie.js";
 import controllerUpdateUser from "../controller/updateUser.js";
+import controllerCreateAvatar from "../controller/createAvatar.js";
+import controllerGetAvatar from "../controller/getAvatar.js";
 import MiddlewareAuthentatication from "../middleware/authentication.js";
 import controllerAuthUser from "../controller/authUser.js";
 
@@ -27,11 +29,15 @@ const Routes = async (fastify, options) => {
 
   fastify.delete("/deleteMovie/:idMovie", controllerDeleteMovie.deleteMovie);
 
-  fastify.put("/updateUser", controllerUpdateUser.updateUser);
+  fastify.put("/updateuser", controllerUpdateUser.updateUser);
 
   fastify.get("/auth/checktoken", controllerAuthUser.authUser);
 
   fastify.get("/listuser", controllerListUserById.getUserById);
+
+  fastify.post("/createavatar", controllerCreateAvatar.createAvatar);
+
+  fastify.get("/getavatar", controllerGetAvatar.getAvatar);
 };
 
 export default Routes;

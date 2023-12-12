@@ -10,7 +10,6 @@ const authentication = (request, reply, done) => {
 
   const token = request.headers.authorization;
 
-  console.log(token);
   if (!token) {
     reply.status(401).send({ message: "token not provided" });
   }

@@ -7,7 +7,7 @@ const app = Fastify({ logger: true });
 
 app.register(fastifyCors, {
   origin: "*",
-  methods: ["GET", "POST", "PATCH", "DELETE"],
+  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
   credentials: true,
   allowedHeaders: ["Authorization", "Content-Type", "x-custom-header"],
 });
